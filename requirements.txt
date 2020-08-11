@@ -1,0 +1,14 @@
+
+                                        colorama
+For optimum experience you need to install the colorama library in your python enviroment.
+To install run:
+            pip install colorama
+
+                                            mock
+To run all the tests you must have the mock library installed your enviroment.To install it run:
+            pip install mock
+
+To run all the tests in the test directory run:
+            python -m unittest
+
+
