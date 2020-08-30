@@ -5,13 +5,13 @@ from tic_tac_toe.player import Player
 from tic_tac_toe.game import Game
 
 
-init(autoreset=True)
+init(autoreset=True) # Initializes the colorama class
 
 
 def initial_player():
     """Determines the first player
-
-    first_player: First player inputs their symbol
+    Vars:
+    first_player: Enables the first user to choose their symbol.
     Returns:
         [True,X]:If the first player choose 'X'
         [True,O]: If the second player chooses 'Y'
@@ -34,7 +34,7 @@ def change_turns(the_player):
     Args:
         the_player:This is the  player  whose turn it currently is.
     Returns:
-        A False boolean is also returned to help switch players in a while loop.
+        A  a tuple of aFalse boolean and the next player is returned to help switch players in the main while loop.
         '[False, X]: The player symbol and   a False boolean returned if the argument was player '0'
         '[False, O]':  The player symbol and a False boolean returned if the argument was player 'X'
 
@@ -47,11 +47,12 @@ def change_turns(the_player):
 
 
 def exit_condition():
-    """Evaluates weather the user wants to restart game or exit
-     exit_game = Prompts the user to restart or exit
-     Returns:
-         True:If the user input indicates restart
-         False:If the use input indicates exit
+    """Evaluates wether the user wants to restart game or exit
+    Vars:
+        exit_game_option = Prompts the user to choose wether to restart or exit
+    Returns:
+        True:If the user input indicates restart
+        False:If the use input indicates exit
 
     """
     while True:
@@ -78,43 +79,46 @@ if __name__ == '__main__':
               "The game shall then turn to the next player after such a move.Welcome Mates!\n"
               "\n ************************************************************************************\n")
 
-        the_game = Game()  # Initialize the Game
+        the_game = Game()  # Initialize the Game.
 
-        player_on_turn = initial_player()  # Allow the first user to choose their symbol
+        player_on_turn = initial_player()  # Allow the first user to choose their symbol.
         while player_on_turn[0]:
 
-            the_game.show_board()  # After a move show the game board
+            the_game.show_board()  # Show the game board.
 
-            player = Player(symbol=player_on_turn[1])  # Allow a player to place their mark in a board position
+            player = Player(symbol=player_on_turn[1])  
+            # Allow a player to place their mark in a board position.
             player_input = player.input_mark()
             mark_indices = player.place_mark(player_input, board=the_game.board)
 
             while not mark_indices:
-                # In case a player  enters an already taken position,lin allow them to take another position
+                # In case a player  enters an already taken position,then allow them to take another position.
                 player_input = player.input_mark()
                 mark_indices = player.place_mark(player_input, board=the_game.board)
 
-            if the_game.determine_win(mark_indices):  # In case of a win, end game.
+            if the_game.determine_win(mark_indices):  
+                # In case of a win, end game.
                 print(Fore.LIGHTGREEN_EX, Style.BRIGHT+"\nGet in there! You Win!")
                 the_game.show_board()
                 break
 
-            if the_game.determine_draw():  # If a draw happens, end game
+            if the_game.determine_draw():  
+                # If a draw happens, end game
                 print(Fore.LIGHTGREEN_EX, Style.BRIGHT+"\n Keep up mates, A Draw")
                 the_game.show_board()
                 break
 
-            player = change_turns(player_on_turn[1])  # Switch players after a move is made
+            player = change_turns(player_on_turn[1])  # Switch players after a move is made.
             player_on_turn = player
             player_on_turn[0] = True
 
         print(Fore.LIGHTYELLOW_EX +
-              "\n****************************************************************************")
+              "\n**************************************************************************************")
         NEW_GAME = False
 
         print(Style.BRIGHT+"Do you want to restart game?")
         if exit_condition():
             NEW_GAME = True  # Restart game if user so desires
         else:
-            sys.exit(Fore.LIGHTYELLOW_EX+"Adios Mates!")  # Exit game if use so desires
+            sys.exit(Fore.LIGHTYELLOW_EX+"Adios Mates!")  # Exit game if user so desires
 

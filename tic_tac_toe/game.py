@@ -1,6 +1,9 @@
+"""This module defines the Game class"""
+
 from colorama import init, Style
 
-init(autoreset=True)
+
+init(autoreset=True) # Initializes the colorama class
 
 
 class Game:
